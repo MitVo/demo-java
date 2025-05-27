@@ -18,7 +18,6 @@ jobs:
         with:
           java-version: '17' ##modificar por una variable de entorno u otra configuracion
           distribution: 'temurin'
-        run: java DemoJavaApplication.java
       - name: Test with maven
         run: mvn clean test
   build:
