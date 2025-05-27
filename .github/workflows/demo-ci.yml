@@ -43,7 +43,7 @@ jobs:
         run: |
           JAR_NAME=$(ls target/*.jar | head -n 1)
           echo "JAR_NAME=${JAR_NAME}" >> $GITHUB_ENV
-          echo "::set-output name=jar_name::${JAR_NAME}"
+          echo "{name}=${JAR_NAME}" >> $GITHUB_OUTPUT
       ## This should go to jfrog
       - name: Upload JAR artifact
         uses: actions/upload-artifact@v4
@@ -59,6 +59,6 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
       - name: Semantic Release Custom Action
-        uses: MitVo/semantic-release-action@v1
+        uses: MitVo/semantic-release-action@v1.0.0
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
