@@ -1,0 +1,63 @@
+name: Maven Java Semantic Release
+
+on:
+  push:
+    branches: [main, dev]
+  workflow_dispatch:
+jobs:
+  test:
+    name: test
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up JDK
+        uses: actions/setup-java@v4
+        with:
+          java-version: '17' ##modificar por una variable de entorno u otra configuracion
+          distribution: 'temurin'
+        run: java DemoJavaApplication.java
+      - name: Test with maven
+        run: mvn clean test
+  build:
+    needs: test
+    name: build
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up JDK
+        uses: actions/setup-java@v4
+        with:
+          java-version: '17' ##modificar por una variable de entorno u otra configuracion
+          distribution: 'temurin'
+
+      - name: Build with maven
+        run: mvn clean package
+
+      - name: Get JAR file name
+        id: get-jar
+        run: |
+          JAR_NAME=$(ls target/*.jar | head -n 1)
+          echo "JAR_NAME=${JAR_NAME}" >> $GITHUB_ENV
+          echo "::set-output name=jar_name::${JAR_NAME}"
+      ## This should go to jfrog
+      - name: Upload JAR artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: demo-java-app
+          path: ${{ env.JAR_NAME }}
+
+  semantic-release:
+    needs: build
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+      - name: Semantic Release Custom Action
+        uses: MitVo/semantic-release-action@v1
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
