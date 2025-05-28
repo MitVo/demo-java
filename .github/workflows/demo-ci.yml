@@ -69,5 +69,5 @@ jobs:
         env:
           REPO_NAME: ${{ env.REPO_NAME }}
         with:
-          release_branch: [develop]
+          release_branch: develop
           github_token: ${{ secrets.GITHUB_TOKEN }}
