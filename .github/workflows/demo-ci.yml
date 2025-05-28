@@ -2,7 +2,7 @@ name: Maven Java Semantic Release
 
 on:
   push:
-    branches: [main, dev]
+    branches: [main, develop]
   workflow_dispatch:
 jobs:
   test:
@@ -58,7 +58,16 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
+
+      - name: Extract repository name
+        run: |
+          REPO_NAME=$(echo "${{ github.repository }}" | cut -d'/' -f2)
+          echo "REPO_NAME=${REPO_NAME}" >> $GITHUB_ENV  
+
       - name: Semantic Release Custom Action
-        uses: MitVo/semantic-release-action@1.0.1
+        uses: MitVo/semantic-release-action@v1.0.2-beta
+        env:
+          REPO_NAME: ${{ env.REPO_NAME }}
         with:
+          release_branch: develop
           github_token: ${{ secrets.GITHUB_TOKEN }}
