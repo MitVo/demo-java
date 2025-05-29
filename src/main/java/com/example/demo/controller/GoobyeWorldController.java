@@ -1,14 +1,13 @@
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RestController;
-
 package com.example.demo.controller;
 
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
 
-@RestController
+@Controller
 public class GoobyeWorldController {
 
     @GetMapping("/goobye")
-    public String goobyeWorld() {
+    public String sayGoobye() {
         return "Goobye World";
     }
 }
