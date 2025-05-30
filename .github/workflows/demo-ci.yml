@@ -62,12 +62,21 @@ jobs:
       - name: Extract repository name
         run: |
           REPO_NAME=$(echo "${{ github.repository }}" | cut -d'/' -f2)
-          echo "REPO_NAME=${REPO_NAME}" >> $GITHUB_ENV  
+          echo "REPO_NAME=${REPO_NAME}" >> $GITHUB_ENV 
+
+      - name: Generate tag
+        run: |
+          TAG_NAME="v$(date +'%Y.%m.%d.%H%M%S')"
+          git tag "${TAG_NAME}"
+          git push origin "${TAG_NAME}"
+          echo "RELEASE_TAG=${TAG_NAME}" >> $GITHUB_ENV
 
       - name: Semantic Release Custom Action
-        uses: MitVo/semantic-release-action@no-pub-mode
+        uses: MitVo/semantic-release-action@tag-spec
         env:
           REPO_NAME: ${{ env.REPO_NAME }}
+          RELEASE_TAG: ${{ env.RELEASE_TAG }}
         with:
           release_branch: develop
           github_token: ${{ secrets.GITHUB_TOKEN }}
+          release_tag: ${{ env.RELEASE_TAG }}

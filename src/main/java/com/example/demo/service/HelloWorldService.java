@@ -6,6 +6,6 @@ import org.springframework.stereotype.Service;
 public class HelloWorldService {
 
     public String getHelloMessage() {
-        return "Hello World";
+        return "Hello World from : " + this.getClass().getName();
     }
 }
