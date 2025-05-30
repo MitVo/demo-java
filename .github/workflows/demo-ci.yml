@@ -65,7 +65,7 @@ jobs:
           echo "REPO_NAME=${REPO_NAME}" >> $GITHUB_ENV  
 
       - name: Semantic Release Custom Action
-        uses: MitVo/semantic-release-action@main
+        uses: MitVo/semantic-release-action@no-pub-mode
         env:
           REPO_NAME: ${{ env.REPO_NAME }}
         with:
