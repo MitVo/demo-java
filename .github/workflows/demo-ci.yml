@@ -84,10 +84,19 @@ jobs:
             PATCH=0
           fi
           
-          # Increment the patch version
-          PATCH=$((PATCH + 1))
-          NEXT_TAG="${MAJOR}.${MINOR}.${PATCH}"
-          echo "Next tag: ${NEXT_TAG}"
+          # Increment the patch version and ensure uniqueness
+          while true; do
+            PATCH=$((PATCH + 1))
+            NEXT_TAG="v${MAJOR}.${MINOR}.${PATCH}"
+            echo "Trying tag: ${NEXT_TAG}"
+
+            # Check if the tag already exists
+            if ! git rev-parse "${NEXT_TAG}" >/dev/null 2>&1; then
+              break
+            fi
+          done
+          
+          echo "Next unique tag: ${NEXT_TAG}"
           
           # Create and push the new tag
           git tag "${NEXT_TAG}"
