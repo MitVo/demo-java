@@ -64,53 +64,12 @@ jobs:
           REPO_NAME=$(echo "${{ github.repository }}" | cut -d'/' -f2)
           echo "REPO_NAME=${REPO_NAME}" >> $GITHUB_ENV 
 
-      - name: Generate tag
-        run: |
-          # Fetch all tags
-          git fetch --tags
-          
-          # Get the latest tag
-          LATEST_TAG=$(git describe --tags $(git rev-list --tags --max-count=1))
-          echo "Latest tag: ${LATEST_TAG}"
-          
-          # Parse the version components (major, minor, patch)
-          if [[ "${LATEST_TAG}" =~ ^v([0-9]+)\.([0-9]+)\.([0-9]+)$ ]]; then
-            MAJOR=${BASH_REMATCH[1]}
-            MINOR=${BASH_REMATCH[2]}
-            PATCH=${BASH_REMATCH[3]}
-          else
-            MAJOR=1
-            MINOR=0
-            PATCH=0
-          fi
-          
-          # Increment the patch version and ensure uniqueness
-          while true; do
-            PATCH=$((PATCH + 1))
-            NEXT_TAG="v${MAJOR}.${MINOR}.${PATCH}"
-            echo "Trying tag: ${NEXT_TAG}"
-
-            # Check if the tag already exists
-            if ! git rev-parse "${NEXT_TAG}" >/dev/null 2>&1; then
-              break
-            fi
-          done
-          
-          echo "Next unique tag: ${NEXT_TAG}"
-          
-          # Create and push the new tag
-          git tag "${NEXT_TAG}"
-          git push origin "${NEXT_TAG}"
-          
-          # Store the tag in the environment variable
-          echo "RELEASE_TAG=${NEXT_TAG}" >> $GITHUB_ENV
-
       - name: Semantic Release Custom Action
-        uses: MitVo/semantic-release-action@tag-spec
+        uses: MitVo/semantic-release-action@main
         env:
           REPO_NAME: ${{ env.REPO_NAME }}
-          RELEASE_TAG: ${{ env.RELEASE_TAG }}
+          #RELEASE_TAG: ${{ env.RELEASE_TAG }}
         with:
           release_branch: develop
           github_token: ${{ secrets.GITHUB_TOKEN }}
-          release_tag: ${{ env.RELEASE_TAG }}
+          #release_tag: ${{ env.RELEASE_TAG }}
