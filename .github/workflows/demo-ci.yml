@@ -64,8 +64,18 @@ jobs:
           REPO_NAME=$(echo "${{ github.repository }}" | cut -d'/' -f2)
           echo "REPO_NAME=${REPO_NAME}" >> $GITHUB_ENV 
 
+      - name: Run Super Linter
+        id: super-linter
+        uses: super-linter/super-linter@v8.1.0
+        env:
+          ENABLE_COMMITLINT_STRICT_MODE: true
+          VALIDATE_GIT_COMMITLINT: true
+          ENFORCE_COMMITLINT_CONFIGURATION_CHECK: true
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
       - name: Semantic Release Custom Action
         uses: MitVo/semantic-release-action@main
+        if : super-linter.outputs.lint-status == 'success'
         env:
           REPO_NAME: ${{ env.REPO_NAME }}
           #RELEASE_TAG: ${{ env.RELEASE_TAG }}
