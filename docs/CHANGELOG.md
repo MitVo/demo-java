@@ -1,5 +1,23 @@
 # Gitmoji Changelog demo-java 🎈
 
+# [v1.2.0-develop.1](https://github.com/MitVo/demo-java/compare/1.1.0...1.2.0-develop.1) (2025-06-03)
+
+## ✨ New Features
+-  add goodbye controller ([`96eec1f`](https://github.com/MitVo/demo-java/commits/96eec1f) 👷 Edwin &#x1F4C5; 2025-06-03 :15:16)
+
+-  Added hello service ([`5cd03ea`](https://github.com/MitVo/demo-java/commits/5cd03ea) 👷 mitzyvalenciaordonez &#x1F4C5; 2025-06-03 :15:16)
+
+-  Added tag spec ([`bf193f6`](https://github.com/MitVo/demo-java/commits/bf193f6) 👷 mitzyvalenciaordonez &#x1F4C5; 2025-06-03 :15:16)
+
+-  Added tag format ([`350bfe9`](https://github.com/MitVo/demo-java/commits/350bfe9) 👷 mitzyvalenciaordonez &#x1F4C5; 2025-06-03 :15:16)
+
+-  Added new controller ([`c0cba52`](https://github.com/MitVo/demo-java/commits/c0cba52) 👷 mitzyvalenciaordonez &#x1F4C5; 2025-06-03 :15:16)
+
+## 🐛 Bug Fixes
+-  fix goodbye controller ([`9557b06`](https://github.com/MitVo/demo-java/commits/9557b06) 👷 Edwin &#x1F4C5; 2025-06-03 :15:16)
+
+-  Fixed conflicts ([`43015a5`](https://github.com/MitVo/demo-java/commits/43015a5) 👷 mitzyvalenciaordonez &#x1F4C5; 2025-06-03 :15:16)
+
 # [v1.1.0](https://github.com/MitVo/demo-java/compare/v1.0.0...v1.1.0) (2025-05-29)
 
 ## ✨ New Features
