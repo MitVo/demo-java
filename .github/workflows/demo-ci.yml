@@ -59,6 +59,10 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@v5
+        with:
+          fetch-depth: 0  # Shallow clones should be disabled for Super-Linter to function properly
+          fetch-tags: true
+          ref: main
 
       - name: Run Super Linter
         id: super-linter
