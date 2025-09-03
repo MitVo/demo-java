@@ -72,7 +72,7 @@ jobs:
       - name: Install commitlint and setting commitlint configuration
         run: |
           npm install -g @commitlint/cli @commitlint/config-conventional
-          echo "module.exports = {extends: ['@commitlint/config-conventional'],['gitmoji'],};" > commitlint.config.js 
+          echo "module.exports = {extends: ['@commitlint/config-conventional'], extends: ['gitmoji'],};" > commitlint.config.js 
 
       - name: Run Super Linter
         id: super-linter
