@@ -71,8 +71,12 @@ jobs:
 
       - name: Install commitlint and setting commitlint configuration
         run: |
+          echo "Current directory: ${{ github.workspace }}"
+          cd ${{ github.workspace }}
+          echo "Check files in the current directory"
+          ls -la
           npm install --save-dev @commitlint/cli commitlint-config-gitmoji commitlint
-          ls -l 
+
 
       - name: Run Super Linter
         id: super-linter
