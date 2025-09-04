@@ -7,6 +7,6 @@ public class HelloWorldService {
 
     public String getHelloMessage() {
         int a = 10;
-        return "Hello World from : " + this.getClass().getName() + " " + a;
+        return "Hello World from new gitmoji configuration : " + this.getClass().getName() + " " + a;
     }
 }
