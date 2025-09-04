@@ -72,6 +72,7 @@ jobs:
       - name: Install commitlint and setting commitlint configuration
         run: |
           npm install --save-dev @commitlint/cli commitlint-config-gitmoji commitlint
+          ls -l 
 
       - name: Run Super Linter
         id: super-linter
@@ -81,7 +82,7 @@ jobs:
           VALIDATE_GIT_COMMITLINT: true
           ENFORCE_COMMITLINT_CONFIGURATION_CHECK: true
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-
+          LINTER_RULES_PATH: config/lint
 
   semantic-release:
     needs: [super-linter]
