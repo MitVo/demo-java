@@ -85,7 +85,6 @@ jobs:
           VALIDATE_GIT_COMMITLINT: true
           ENFORCE_COMMITLINT_CONFIGURATION_CHECK: true
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          LINTER_RULES_PATH: config/lint
           DEFAULT_BRANCH: develop
 
   semantic-release:
