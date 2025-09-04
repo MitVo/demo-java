@@ -77,7 +77,6 @@ jobs:
           ls -la
           npm install --save-dev @commitlint/cli commitlint-config-gitmoji commitlint
 
-
       - name: Run Super Linter
         id: super-linter
         uses: super-linter/super-linter@v8.1.0
@@ -87,6 +86,7 @@ jobs:
           ENFORCE_COMMITLINT_CONFIGURATION_CHECK: true
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           LINTER_RULES_PATH: config/lint
+          DEFAULT_BRANCH: develop
 
   semantic-release:
     needs: [super-linter]
