@@ -71,7 +71,7 @@ jobs:
 
       - name: Install commitlint and setting commitlint configuration
         run: |
-          npm install -D commitlint-config-gitmoji commitlint
+          npm install --save-dev @commitlint/cli @commitlint/config-gitmoji
           echo "module.exports = {extends: ['gitmoji'],rules:{'type-enum':[2,'always',['bug']]}};" > commitlint.config.js 
 
       - name: Run Super Linter
