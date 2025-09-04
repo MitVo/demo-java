@@ -1,10 +1,5 @@
 module.exports = {
-  parserPreset: {
-    parserOpts: {
-      headerPattern: /^(:\w+:) (.+)$/,
-      headerCorrespondence: ['type', 'subject'],
-    },
-  },
+  extends: ['gitmoji'],
   rules: {
     'subject-empty': [2, 'never'],
     'type-empty': [2, 'always'],
